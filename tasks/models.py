@@ -14,7 +14,7 @@ class Task(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(null=True, blank=True, default=now)
     is_completed = models.BooleanField(default=False)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tags")
 
     def __str__(self):
         return f"{self.content} {self.is_completed}"

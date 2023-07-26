@@ -1,5 +1,5 @@
 from django.db.models import F
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -10,10 +10,7 @@ class TaskListView(generic.ListView):
     model = Task
     template_name = "tasks/task_list.html"
     context_object_name = "task_list"
-    queryset = (
-        Task.objects.all()
-        .order_by(F("is_completed"), "-created_time")
-    )
+    queryset = Task.objects.all().order_by(F("is_completed"), "-created_time")
 
 
 class TaskCreateView(generic.CreateView):
@@ -43,12 +40,8 @@ class TaskCompletedView(generic.View):
     def post(self, request, pk):
         task = Task.objects.get(id=pk)
 
-        if task.is_completed:
-            task.is_completed = False
-            task.save()
-        else:
-            task.is_completed = True
-            task.save()
+        task.is_completed = not task.is_completed
+        task.save()
 
         return redirect("tasks:home")
 
@@ -77,4 +70,3 @@ class TagDeleteView(generic.DeleteView):
     model = Tag
     success_url = reverse_lazy("tasks:tag_list")
     template_name = "tasks/tag_confirm_delete.html"
-
