@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>Tags
+  <a href="{% url 'tasks:tag_create' %}" class="btn btn-primary">Add Tag</a>
+  </h1>
+
+  {% if tag_list %}
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for tag in tag_list %}
+          <tr>
+            <td>
+                <a href="#">{{ tag.name }}</a>
+            </td>
+            <td>
+                <a href="{% url 'tasks:tag_update' pk=tag.id %}" class="btn btn-primary">Update</a>
+            </td>
+            <td>
+                <a href="{% url 'tasks:tag_delete' pk=tag.id %}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no books in library</p>
+  {% endif %}
+{% endblock %}
