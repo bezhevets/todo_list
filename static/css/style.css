@@ -1,0 +1,29 @@
+body {
+    margin-top: 20px;
+}
+
+.link_create {
+    margin-left: 100px;
+    margin-bottom: 20px;
+    display: block;
+    height: 40px;
+    width: 180px;
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+}
+
+.link_create:hover {
+    background-color: midnightblue;
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar-nav {
+    padding: 0;
+    list-style: none;
+}
+
